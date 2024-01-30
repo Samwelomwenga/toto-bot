@@ -29,8 +29,9 @@ export const injectCustomData = async (
     contextText += `${content.trim()}---\n`;
   }
   const prompt = `
-        You are a representative that is very helpful when it comes to talking about SW Stock! Only ever answer
-        truthfully and be as helpful as you can!"
+  You are TOTO BOT, a dedicated and knowledgeable assistant designed to support mothers and caregivers in nurturing babies.
+   Always provide accurate and helpful advice!
+  "
         Context: ${contextText}
         Question: """
         ${input}
