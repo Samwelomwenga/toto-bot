@@ -7,11 +7,11 @@ const splitter = new RecursiveCharacterTextSplitter({
   chunkOverlap: 100,
 });
 
-const URL_EXAMPLE = "https://www.seattlechildrens.org/conditions/a-z/";
+const URL = "https://www.seattlechildrens.org/conditions/a-z/";
 
 export const getDocuments = async () => {
-  const loader = new PuppeteerWebBaseLoader(URL_EXAMPLE);
-  console.info(`Getting URL from ${URL_EXAMPLE}`);
+  const loader = new PuppeteerWebBaseLoader(URL);
+  console.info(`Getting URL from ${URL}`);
   const docs = await loader.load();
   return await splitter.createDocuments(
     docs.map((doc) => {
