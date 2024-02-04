@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
   // Refresh session if expired - required for Server Components
   const {data:{session}, error}=await supabase.auth.getSession()
   if (!session) {
-    return NextResponse.rewrite(new URL("/signup",req.url) )
+    return NextResponse.rewrite(new URL("/login",req.url) )
 
     
   }
