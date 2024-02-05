@@ -1,11 +1,13 @@
-import Chat from "./chat";
+import Header from "@/components/Header";
+import Chat from "../components/chat";
 
 export const runtime = "edge";
 
 export default function Page() {
   return (
-    <div className="h-full w-full p-8 flex bg-red-500">
+    <main className=" min-h-svh w-full   bg-green-200">
+      <Header/>
       <Chat />
-    </div>
+    </main>
   );
 }
