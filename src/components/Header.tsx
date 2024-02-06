@@ -1,14 +1,13 @@
 "use client";
-import { useState } from "react";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
-import Menu from "./Menu";
-function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+// import Menu from "./Menu";
+function Header({ isOpen, toggle}:{isOpen: boolean, toggle: () => void}) {
+ 
   return (
-    <header className="text-black bg-teal-600 h-20 w-full px-3 pt-5 shadow-lg sticky">
+    <header className="text-black bg-teal-600 h-12 w-full px-3 py-5 shadow-lg sticky md:hidden">
       <div className="flex justify-between mb-8">
+        <p className="text-2xl font-semibold text-orange-400">TOTO BOT</p>
         {!isOpen ? (
           <SlMenu
           className={` w-7 h-7 text-orange-400 transition-transform duration-700 ease-in-out ${isOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`}
@@ -20,11 +19,8 @@ function Header() {
             onClick={toggle}
             />
             )}
-            <p className="text-2xl font-semibold text-orange-400">TOTO BOT</p>
       </div>
-      {isOpen ? (
-       <Menu />
-      ) : null}
+      
     </header>
   );
 }
