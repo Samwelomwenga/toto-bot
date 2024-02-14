@@ -1,13 +1,10 @@
 "use client";
 import { useState } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
 import Profile from "./Profile";
 import CreateChat from "./CreateChat";
+import { supabase } from "@/app/utils/supabase";
 
 function Menu({ isOpen }: { isOpen: boolean }) {
-  const supabase = createClientComponentClient();
-  const router = useRouter();
   const [userName, setUserName] = useState<string>("");
 
   const getUserName = async () => {
@@ -23,7 +20,7 @@ function Menu({ isOpen }: { isOpen: boolean }) {
   return (
     <>
       <aside
-        className={` bg-black fixed top-0 left-0 md:static h-48 rounded  md:rounded-none shadow-md animate-fade-in-right  m-h-svh ${
+        className={` bg-black bg-contain fixed top-0  left-0 md:static h-48 rounded  md:rounded-none shadow-md animate-fade-in-right  m-h-svh md:h-full ${
           isOpen ? "block" : "hidden"
         } md:block w-5/6 min-h-screen z-20`}
       >
