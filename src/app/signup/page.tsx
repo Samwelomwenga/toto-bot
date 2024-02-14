@@ -74,7 +74,7 @@ export default function Signup() {
 
   const handleSignup = async (data: SignupData) => {
     try {
-      await supabase.auth.signUp({
+      const {error}=await supabase.auth.signUp({
         email: data.email,
         password: data.password,
         options: {
@@ -84,6 +84,7 @@ export default function Signup() {
           emailRedirectTo: `${location.origin}/auth/callback`,
         },
       });
+      console.log("error",error);
       toast.success('SignedUP!', {
         position: "top-center",
         autoClose: 2000,
@@ -161,11 +162,19 @@ export default function Signup() {
         {errors.password && (
           <p className="text-red-500">{errors.password.message}</p>
         )}
-        <button className="bg-orange-400 py-3 px-4 rounded-md border-none text-center mt-14 hover:text-orange-400 hover:bg-green-200 transition-2000">
+         <button
+          disabled={isLoading}
+          className="bg-orange-400 py-3 px-16 mx-12 mt-14 mb-8 text-lg font-medium rounded-md border-none text-center  hover:bg-orange-300 transition-2000"
+        >
           {" "}
-          
-          {isLoading ? <ImSpinner9 /> : "Sign Up"}
+          {isLoading ? <ImSpinner9 /> : "SIGN UP"}{" "}
         </button>
+        <a
+          href="/login"
+          className="text-center block hover:cursor-pointer hover:text-orange-400"
+        >
+          You have an account? login
+        </a>
       </form>
       <ToastContainer />
     </main>
