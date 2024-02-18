@@ -1,4 +1,5 @@
-import { ChatInitialState, Message } from "@/components/chat";
+import { ChatInitialState,Message } from "@/app/hooks/useChatHandlers";
+
 
 type ChatAction =
   | { type: "SET_CONVERSATION_ID"; payload: string }
