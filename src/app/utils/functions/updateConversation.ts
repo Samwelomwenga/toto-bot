@@ -15,6 +15,7 @@ const updateConversation = async (messages:Message[],currentConversationId:strin
       if (error) {
         throw new Error(error.message);
       }
+      return data;
     } catch (error) {
       console.error("Error updating conversation", error);
     }

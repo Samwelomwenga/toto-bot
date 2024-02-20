@@ -3,6 +3,7 @@ import { useChat } from "ai/react";
 import chatReducer from "@/app/utils/reducers/chatReducer";
 import insertConversation from "../utils/functions/insertConversation";
 import updateConversation from "../utils/functions/updateConversation";
+import { supabase } from "../utils/supabase";
 
 export type Message = {
   id: string;
@@ -31,12 +32,18 @@ function useChatHandlers() {
     event.preventDefault();
     handleSubmit(event);
     if (chatState.conversationId) {
-      await updateConversation(messages, chatState.conversationId);
+      const data= await updateConversation(messages, chatState.conversationId);
+      if(data&&data.length>0){
+        const [{ conversation_id, messages }] = data;
+        console.log("conversation_id:", conversation_id,"messages type:",typeof messages);
+      }
       return;
     }
-
     const data = await insertConversation(messages);
-    console.log("data inside useChatHandler", data);
+    if(data&&data.length>0){
+      const [{ conversation_id, messages }] = data;
+    console.log("conversation_id:", conversation_id,"messages type:",typeof messages);
+    }
 
     // dispatch({ type: "SET_CONVERSATION_ID", payload: conversation_id });
   };
