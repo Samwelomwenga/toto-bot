@@ -13,7 +13,7 @@ export type Message = {
 export type ChatInitialState = {
   conversationId: string | null;
   messages: Message[];
-  userId: string;
+  userId: string|undefined;
 };
 
 function useChatHandlers() {
@@ -32,22 +32,28 @@ function useChatHandlers() {
     event.preventDefault();
     handleSubmit(event);
     if (chatState.conversationId) {
+      console.log("conversationId", chatState.conversationId);
       const data= await updateConversation(messages, chatState.conversationId);
       if(data&&data.length>0){
         const [{ conversation_id, messages }] = data;
-        console.log("conversation_id:", conversation_id,"messages type:",typeof messages);
+        console.log("conversation_id:", conversation_id,"messages:", messages);
+        const parsedMessages:Message[] = JSON.parse(messages);
+        dispatch({ type: "UPDATE_CHAT_STATE", payload: parsedMessages });
       }
       return;
     }
     const data = await insertConversation(messages);
     if(data&&data.length>0){
+      const userId=(await supabase.auth.getSession()).data.session?.user.id;
       const [{ conversation_id, messages }] = data;
-    console.log("conversation_id:", conversation_id,"messages type:",typeof messages);
+      const parsedMessages:Message[] = JSON.parse(messages);
+    console.log("conversation_id:", conversation_id,"messages:", parsedMessages,"userId:",userId);
+    dispatch({ type: "SET_CHAT_STATE", payload: { conversationId: conversation_id, messages: parsedMessages, userId: userId } }) 
+
+
     }
 
-    // dispatch({ type: "SET_CONVERSATION_ID", payload: conversation_id });
   };
-  // console.log("chatState before return", chatState);
   return {
     chatState,
     dispatch,

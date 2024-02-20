@@ -4,6 +4,7 @@ import { Message } from "@/app/hooks/useChatHandlers";
 const updateConversation = async (messages:Message[],currentConversationId:string) => {
     try {
         console.log("updateConversation", messages);
+        console.log("currentConversationId",currentConversationId)
       const messagesJSON = JSON.stringify(messages);
       const { data, error } = await supabase
         .from("conversations")
