@@ -1,12 +1,7 @@
-import { supabase } from "../utils/supabase";
-import { Message } from "./useChatHandlers";
+import { Message } from "@/app/hooks/useChatHandlers";
+import { supabase } from "../supabase";
 
-function useInsertConversation() {
-  // const { messages } = useChat({
-  //   api: "/api/chat",
-  // });
-
-  const insertConversation = async (messages:Message[]) => {
+const insertConversation = async (messages:Message[]) => {
     try {
 
       console.log("inserting messages", messages);
@@ -38,6 +33,4 @@ function useInsertConversation() {
       console.error("Error inserting conversation", error);
     }
   };
-  return { insertConversation};
-}
-export default useInsertConversation;
+  export default insertConversation;
