@@ -5,17 +5,26 @@ import insertConversation from "../utils/functions/insertConversation";
 import updateConversation from "../utils/functions/updateConversation";
 import { supabase } from "../utils/supabase";
 
+
+
+// const handleChatSubmit = async ({event, data = messages} : SubmitData) => {}
+
 export type Message = {
   id: string;
   role: string;
   content: string;
+  
 };
+interface SubmitData {
+  event: any;
+  datas?: Message[]; // we can do any 
+}
 export type ChatInitialState = {
   conversationId: string | null;
   messages: Message[];
   userId: string|undefined;
 };
-
+// hello
 function useChatHandlers() {
   const chatInitialState: ChatInitialState = {
     conversationId: null,
@@ -28,9 +37,12 @@ function useChatHandlers() {
   });
   console.log("messages inside useChatHandlers", messages);
 
-  const handleChatSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleChatSubmit = async ({event, datas = messages} : SubmitData) => {
     event.preventDefault();
+    console.log("Event",event.target);
+    console.log("datas",datas);
     handleSubmit(event);
+    console.log("messages before insert", messages);
     if (chatState.conversationId) {
       console.log("conversationId", chatState.conversationId);
       const data= await updateConversation(messages, chatState.conversationId);
@@ -42,6 +54,7 @@ function useChatHandlers() {
       }
       return;
     }
+    
     const data = await insertConversation(messages);
     if(data&&data.length>0){
       const userId=(await supabase.auth.getSession()).data.session?.user.id;

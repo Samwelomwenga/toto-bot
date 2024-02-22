@@ -3,35 +3,33 @@ import useChatHandlers from "@/app/hooks/useChatHandlers";
 import { IoSend } from "react-icons/io5";
 
 export default function MyComponent() {
-  // useEffect(() => {
-  //   dispatch({ type: "SET_MESSAGES", payload: messages });
-  // }, [messages]);
-  // console.log("messages", state.messages, "\n", "state", state);
-  const { chatState,  handleChatSubmit, handleInputChange, input } =
+  const { chatState, handleChatSubmit, handleInputChange, input } =
     useChatHandlers();
+  console.log("chatState", chatState);
 
   return (
     <div className="mx-auto w-full px-1 py-2 md:col-start-3 md:col-span-3 mb-20 h-full">
       <ul className="space-y-3 w-full md:space-y-6 md:py-8 mb-4">
-        {chatState.messages.map((m) => (
-          <li
-            key={m.id}
-            className={`p-2 md:p-6 rounded ${
-              m.role !== "user" ? "bg-orange-200" : "bg-teal-400"
-            } ${
-              m.role === "user" ? "mr-auto" : "ml-auto"
-            } shadow text-gray-700 ${m.role === "user" ? "w-3/4" : "w-5/6"} `}
-          >
-            <span className="font-semibold">
-              {m.role === "user" ? "User: " : "BOT: "}
-            </span>
-            {m.content}
-          </li>
-        ))}
+        {chatState.messages.length > 0 &&
+          chatState.messages.map((m) => (
+            <li
+              key={m.id}
+              className={`p-2 md:p-6 rounded ${
+                m.role !== "user" ? "bg-orange-200" : "bg-teal-400"
+              } ${
+                m.role === "user" ? "mr-auto" : "ml-auto"
+              } shadow text-gray-700 ${m.role === "user" ? "w-3/4" : "w-5/6"} `}
+            >
+              <span className="font-semibold">
+                {m.role === "user" ? "User: " : "BOT: "}
+              </span>
+              {m.content}
+            </li>
+          ))}
       </ul>
 
       <form
-        onSubmit={handleChatSubmit}
+        onSubmit={(event)=>{handleChatSubmit({event})}}
         className="fixed bottom-2 flex justify-between gap-1  w-full px-2 z-0 md:px-3  md:bottom-5 md:w-1/2 md:justify-center md:gap-4"
       >
         <input
