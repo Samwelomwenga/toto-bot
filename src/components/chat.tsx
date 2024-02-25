@@ -1,12 +1,20 @@
 "use client";
+
+import Image from "next/image";
 import useChatHandlers from "@/app/hooks/useChatHandlers";
 import { IoSend } from "react-icons/io5";
+import loadingGif from "../../public/loading.gif";
 
 export default function MyComponent() {
-  const { chatState, handleChatSubmit, handleInputChange, input } =
-    useChatHandlers();
+  const {
+    chatState,
+    handleChatSubmit,
+    handleInputChange,
+    input,
+    loadingMessages,
+  } = useChatHandlers();
   console.log("chatState", chatState);
-
+  console.log("loadingMessages", loadingMessages);
   return (
     <div className="mx-auto w-full px-1 py-2 md:col-start-3 md:col-span-3 mb-20 h-full">
       <ul className="space-y-3 w-full md:space-y-6 md:py-8 mb-4">
@@ -23,13 +31,19 @@ export default function MyComponent() {
               <span className="font-semibold">
                 {m.role === "user" ? "User: " : "BOT: "}
               </span>
-              {m.content}
+              {loadingMessages ? (
+                <Image src={loadingGif} alt="loading" />
+              ) : (
+                m.content
+              )}
             </li>
           ))}
       </ul>
 
       <form
-        onSubmit={(event)=>{handleChatSubmit({event})}}
+        onSubmit={(event) => {
+          handleChatSubmit(event);
+        }}
         className="fixed bottom-2 flex justify-between gap-1  w-full px-2 z-0 md:px-3  md:bottom-5 md:w-1/2 md:justify-center md:gap-4"
       >
         <input
