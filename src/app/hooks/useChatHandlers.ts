@@ -1,31 +1,28 @@
-import { useReducer } from "react";
+import { FormEvent, useCallback, useEffect, useReducer, useState } from "react";
 import { useChat } from "ai/react";
 import chatReducer from "@/app/utils/reducers/chatReducer";
 import insertConversation from "../utils/functions/insertConversation";
 import updateConversation from "../utils/functions/updateConversation";
 import { supabase } from "../utils/supabase";
-
-
-
-// const handleChatSubmit = async ({event, data = messages} : SubmitData) => {}
+import { debounce } from "lodash";
 
 export type Message = {
   id: string;
   role: string;
   content: string;
-  
 };
-interface SubmitData {
-  event: any;
-  datas?: Message[]; // we can do any 
+type SubmitData ={
+  event: FormEvent<HTMLFormElement>;
+  // chatMessages?: Message[]; // we can do any 
+  // chatState?: ChatInitialState;
 }
 export type ChatInitialState = {
   conversationId: string | null;
   messages: Message[];
-  userId: string|undefined;
+  userId?: string;
 };
-// hello
 function useChatHandlers() {
+
   const chatInitialState: ChatInitialState = {
     conversationId: null,
     messages: [],
@@ -35,44 +32,60 @@ function useChatHandlers() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/chat",
   });
-  console.log("messages inside useChatHandlers", messages);
+  const [loadingMessages, setLoadingMessages] = useState<boolean>(false)
+  // Debounced function to update messages
+  const debouncedUpdateMessages = useCallback(
+    debounce((chatMessages:Message[]) => {
+      updateMessages(chatMessages);
+    }, 1000), // Adjust debounce time as needed
+    [chatState] // Add other dependencies if needed
+  );
 
-  const handleChatSubmit = async ({event, datas = messages} : SubmitData) => {
-    event.preventDefault();
-    console.log("Event",event.target);
-    console.log("datas",datas);
-    handleSubmit(event);
-    console.log("messages before insert", messages);
-    if (chatState.conversationId) {
-      console.log("conversationId", chatState.conversationId);
-      const data= await updateConversation(messages, chatState.conversationId);
-      if(data&&data.length>0){
-        const [{ conversation_id, messages }] = data;
-        console.log("conversation_id:", conversation_id,"messages:", messages);
-        const parsedMessages:Message[] = JSON.parse(messages);
+  useEffect(() => {
+
+    // Call debouncedUpdateMessages only if there's a new message and some time has passed
+    if (messages.length > 0) {
+      console.log("messages", messages);
+      debouncedUpdateMessages(messages);
+    }
+  }, [debouncedUpdateMessages, messages]);
+
+  const handleChatSubmit = async (event:FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    handleSubmit(event)
+  };
+
+  async function updateMessages(chatMessages: Message[]) {
+    setLoadingMessages(true)
+    if (chatState && chatState?.conversationId) {
+      const data = await updateConversation(chatMessages, chatState.conversationId);
+      if (data && data.length > 0) {
+        const [{  messages }] = data;
+        const parsedMessages: Message[] = JSON.parse(messages);
+        console.log("updating with parsedMessages", parsedMessages);
         dispatch({ type: "UPDATE_CHAT_STATE", payload: parsedMessages });
       }
       return;
     }
-    
-    const data = await insertConversation(messages);
-    if(data&&data.length>0){
-      const userId=(await supabase.auth.getSession()).data.session?.user.id;
+
+    const data = await insertConversation(chatMessages);
+    if (data && data.length > 0) {
+      const userId = (await supabase.auth.getSession()).data.session?.user.id;
       const [{ conversation_id, messages }] = data;
-      const parsedMessages:Message[] = JSON.parse(messages);
-    console.log("conversation_id:", conversation_id,"messages:", parsedMessages,"userId:",userId);
-    dispatch({ type: "SET_CHAT_STATE", payload: { conversationId: conversation_id, messages: parsedMessages, userId: userId } }) 
-
-
+      const parsedMessages: Message[] = JSON.parse(messages);
+      dispatch({ type: "SET_CHAT_STATE", payload: { conversationId: conversation_id, messages: parsedMessages, userId: userId } })
     }
 
-  };
+    setLoadingMessages(false)
+  }
+
   return {
     chatState,
     dispatch,
     handleChatSubmit,
     handleInputChange,
     input,
+    loadingMessages
   };
 }
 export default useChatHandlers;

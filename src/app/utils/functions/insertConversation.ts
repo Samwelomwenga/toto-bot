@@ -15,18 +15,15 @@ const insertConversation = async (messages: Message[]) => {
       .from("conversations")
       .insert([{ messages: messagesJSON, "User UID": userUId }])
       .select();
-    console.log("data", data);
+    if (data) {
+      console.log("Supabase Data", JSON.parse(data[0].messages));
+    }
+
     if (Array.isArray(data)) {
       if (error) {
         throw new Error(error.message);
       }
 
-      // const [{ conversation_id,messages }] = data;
-      // console.log("conversationId", conversation_id);
-      // console.log("messages inside useInsertConversation", messages);
-
-      //   dispatch({ type: "SET_CONVERSATION_ID", payload: conversation_id });
-      //   dispatch({ type: "SET_MESSAGES", payload: messages });
       return data as Conversation[];
     }
   } catch (error) {
