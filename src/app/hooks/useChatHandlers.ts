@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useEffect, useReducer, useState } from "react";
+import { FormEvent, useCallback, useEffect, useReducer} from "react";
 import { useChat } from "ai/react";
 import chatReducer from "@/app/utils/reducers/chatReducer";
 import insertConversation from "../utils/functions/insertConversation";
@@ -11,15 +11,13 @@ export type Message = {
   role: string;
   content: string;
 };
-type SubmitData ={
-  event: FormEvent<HTMLFormElement>;
-  // chatMessages?: Message[]; // we can do any 
-  // chatState?: ChatInitialState;
-}
+
 export type ChatInitialState = {
   conversationId: string | null;
   messages: Message[];
   userId?: string;
+  loadingMessages: boolean;
+  error:{message:string,isError:boolean}|null
 };
 function useChatHandlers() {
 
@@ -27,12 +25,13 @@ function useChatHandlers() {
     conversationId: null,
     messages: [],
     userId: "",
+    loadingMessages: false,
+    error:null
   };
   const [chatState, dispatch] = useReducer(chatReducer, chatInitialState);
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/chat",
   });
-  const [loadingMessages, setLoadingMessages] = useState<boolean>(false)
   // Debounced function to update messages
   const debouncedUpdateMessages = useCallback(
     debounce((chatMessages:Message[]) => {
@@ -56,7 +55,9 @@ function useChatHandlers() {
   };
 
   async function updateMessages(chatMessages: Message[]) {
-    setLoadingMessages(true)
+    dispatch({ type: "SET_LOADING_MESSAGES", payload: true });
+    try {
+      
     if (chatState && chatState?.conversationId) {
       const data = await updateConversation(chatMessages, chatState.conversationId);
       if (data && data.length > 0) {
@@ -75,8 +76,15 @@ function useChatHandlers() {
       const parsedMessages: Message[] = JSON.parse(messages);
       dispatch({ type: "SET_CHAT_STATE", payload: { conversationId: conversation_id, messages: parsedMessages, userId: userId } })
     }
+  }catch(error){
+    const e = error as Error
+    dispatch({type:"SET_ERROR",payload:{message:e.message,isError:true}})
+  } finally {
+    dispatch({ type: "SET_LOADING_MESSAGES", payload: false });
+  }
 
-    setLoadingMessages(false)
+  
+
   }
 
   return {
@@ -85,7 +93,6 @@ function useChatHandlers() {
     handleChatSubmit,
     handleInputChange,
     input,
-    loadingMessages
   };
 }
 export default useChatHandlers;

@@ -11,10 +11,8 @@ export default function MyComponent() {
     handleChatSubmit,
     handleInputChange,
     input,
-    loadingMessages,
   } = useChatHandlers();
   console.log("chatState", chatState);
-  console.log("loadingMessages", loadingMessages);
   return (
     <div className="mx-auto w-full px-1 py-2 md:col-start-3 md:col-span-3 mb-20 h-full">
       <ul className="space-y-3 w-full md:space-y-6 md:py-8 mb-4">
@@ -31,7 +29,7 @@ export default function MyComponent() {
               <span className="font-semibold">
                 {m.role === "user" ? "User: " : "BOT: "}
               </span>
-              {loadingMessages ? (
+              {chatState.loadingMessages ? (
                 <Image src={loadingGif} alt="loading" />
               ) : (
                 m.content
