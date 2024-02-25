@@ -47,7 +47,7 @@ function useChatHandlers() {
       console.log("messages", messages);
       debouncedUpdateMessages(messages);
     }
-  }, [debouncedUpdateMessages, messages]);
+  }, [messages]);
 
   const handleChatSubmit = async (event:FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
