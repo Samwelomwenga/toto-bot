@@ -3,9 +3,12 @@ import { useState } from "react";
 import Profile from "./Profile";
 import CreateChat from "./CreateChat";
 import { supabase } from "@/app/utils/supabase";
-import ChatHistory from "./ChatHistory";
 
-function Menu({ isOpen }: { isOpen: boolean }) {
+type MenuProps = {
+  isOpen: boolean;
+  children: React.ReactNode;
+};
+function Menu({ isOpen, children }: MenuProps) {
   const [userName, setUserName] = useState<string>("");
 
   const getUserName = async () => {
@@ -26,7 +29,7 @@ function Menu({ isOpen }: { isOpen: boolean }) {
         } md:block w-5/6 min-h-screen z-20`}
       >
         <CreateChat />
-        <ChatHistory/>
+        {children}
 
         {userName ? <Profile userName={userName} /> : null}
       </aside>

@@ -1,18 +1,26 @@
 "use client";
 
+import { ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
-import useChatHandlers from "@/app/hooks/useChatHandlers";
 import { IoSend } from "react-icons/io5";
 import loadingGif from "../../public/loading.gif";
+import { ChatInitialState } from "@/app/hooks/useChatHandlers";
 
-export default function MyComponent() {
-  const {
-    chatState,
-    handleChatSubmit,
-    handleInputChange,
-    input,
-  } = useChatHandlers();
-  console.log("chatState", chatState);
+type MyComponentProps = {
+  chatState: ChatInitialState;
+  handleChatSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>;
+  handleInputChange: (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => void;
+  input: string;
+};
+
+export default function MyComponent({
+  chatState,
+  handleChatSubmit,
+  handleInputChange,
+  input,
+}: MyComponentProps) {
   return (
     <div className="mx-auto w-full px-1 py-2 md:col-start-3 md:col-span-3 mb-20 h-full">
       <ul className="space-y-3 w-full md:space-y-6 md:py-8 mb-4">

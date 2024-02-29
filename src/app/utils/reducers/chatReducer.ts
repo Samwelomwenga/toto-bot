@@ -1,11 +1,11 @@
 import { ChatInitialState, Message } from "@/app/hooks/useChatHandlers";
 type setChatPayload = Omit<ChatInitialState, "loadingMessages" | "error">;
 
-type ChatAction =
+export type ChatAction =
   | { type: "SET_CHAT_STATE"; payload: setChatPayload }
   | { type: "UPDATE_CHAT_STATE"; payload: Message[] }
   | { type: "SET_LOADING_MESSAGES"; payload: boolean }
-  | { type: "SET_ERROR"; payload:{message:string,isError:boolean} };
+  | { type: "SET_ERROR"; payload: { message: string; isError: boolean } };
 
 const chatReducer = (state: ChatInitialState, action: ChatAction) => {
   switch (action.type) {
