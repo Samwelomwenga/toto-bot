@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { supabase } from "../utils/supabase";
-import {  toast, Slide } from "react-toastify";
+import { toast, Slide } from "react-toastify";
 export const FormSchema = z.object({
   email: z
     .string()
@@ -43,60 +43,58 @@ export const FormSchema = z.object({
 });
 export type FormData = z.infer<typeof FormSchema>;
 function useLogin() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(FormSchema),
+  });
+  const router = useRouter();
 
-        const {
-          register,
-          handleSubmit,
-          formState: { errors },
-        } = useForm<FormData>({
-          resolver: zodResolver(FormSchema),
-        });
-        const router = useRouter();
-      
-        const [isLoading, setIsLoading] = useState(false);
-      
-        const handleLogin = async (data: FormData) => {
-          try {
-            setIsLoading(true);
-            await supabase.auth.signInWithPassword({
-              email: data.email,
-              password: data.password,
-            });
-            toast.success("SignedIn!", {
-              position: "top-center",
-              autoClose: 10000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              transition: Slide,
-            });
-            router.refresh();
-          } catch (error) {
-            console.log(error);
-            toast.error("An Error Occurred!", {
-              position: "top-center",
-              autoClose: 2000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              transition: Slide,
-            });
-          } finally {
-            setIsLoading(false);
-          }
-        };
-        return {register,handleSubmit,errors,isLoading,handleLogin}
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = async (data: FormData) => {
+    try {
+      setIsLoading(true);
+      const { error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+      if (error) {
+        throw new Error(error.message);
       }
-        
-
-
-  
-
+      toast.success("SignedIn!", {
+        position: "top-center",
+        autoClose: 10000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      router.refresh();
+    } catch (e) {
+      const error = e as Error;
+      console.log(error);
+      toast.error(`${error.message}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return { register, handleSubmit, errors, isLoading, handleLogin };
+}
 
 export default useLogin;
