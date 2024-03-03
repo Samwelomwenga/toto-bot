@@ -6,7 +6,6 @@ const useHistoryClick = ({ chatState, dispatch }: UseHistoryClickProps) => {
   const handleHistoryClick = async (conversationId: string) => {
     dispatch({ type: "SET_LOADING_MESSAGES", payload: true });
     try {
-      console.log("Clicked conversation");
       const { data, error } = await supabase
         .from("conversations")
         .select("*")

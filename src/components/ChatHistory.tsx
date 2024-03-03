@@ -3,6 +3,7 @@ import { ChatInitialState } from "@/app/hooks/useChatHandlers";
 import useHistory from "@/app/hooks/useHistory";
 import useHistoryClick from "@/app/hooks/useHistoryClick";
 import { ChatAction } from "@/app/utils/reducers/chatReducer";
+import History from "./History";
 
 export type ChatHistoryProps = {
   chatState: ChatInitialState;
@@ -18,18 +19,10 @@ function ChatHistory({ chatState, dispatch }: ChatHistoryProps) {
       <div className="overflow-y-auto">
         {history.length > 0 ? (
           history.map((chat) => (
-            <div
-              key={chat.conversation_id}
-              className="p-2 border-b-2 hover:cursor-pointer"
-              onClick={() => handleHistoryClick(chat.conversation_id)}
-            >
-              <p className="text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-                {chat.conversation_id}
-              </p>
-            </div>
+            <History key={chat.conversation_id} conversation_id={chat.conversation_id} messages={chat.messages} handleHistoryClick={handleHistoryClick}/>
           ))
         ) : (
-          <p className="text-center text-gray-600">No chat history</p>
+          <p className="text-center ">No chat history</p>
         )}
       </div>
     </div>
