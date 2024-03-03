@@ -1,12 +1,19 @@
 import { Message } from "@/app/hooks/useChatHandlers";
+import { ChatHistoryProps } from "./ChatHistory";
+import useHistoryClick from "@/app/hooks/useHistoryClick";
 
 type HistoryProps = {
-    conversation_id: string;
-    messages: string;
-    handleHistoryClick: (conversation_id: string) => void;
-    };
-function History({conversation_id,messages, handleHistoryClick}:HistoryProps) {
-    const parsedMessages:Message[] = JSON.parse(messages);
+  conversation_id: string;
+  messages: string;
+} & ChatHistoryProps;
+function History({
+  conversation_id,
+  messages,
+  chatState,
+  dispatch,
+}: HistoryProps) {
+  const { handleHistoryClick } = useHistoryClick({ chatState, dispatch });
+  const parsedMessages: Message[] = JSON.parse(messages);
   return (
     <div
       className="p-2 border-b-2 border-gray-600 hover:cursor-pointer"
