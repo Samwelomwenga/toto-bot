@@ -5,7 +5,7 @@ function useDeleteHistory() {
   const handleDeleteHistory = async (conversationId: string) => {
     try {
       const { error } = await supabase
-        .from("messages")
+        .from("conversations")
         .delete()
         .eq("conversation_id", conversationId);
       if (error) {
@@ -26,7 +26,7 @@ function useDeleteHistory() {
     } catch (e) {
       const error = e as Error;
       console.log(error);
-      toast.error(`${error.message}`, {
+      toast.error("An Error Occurred While Deleting History", {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: true,
