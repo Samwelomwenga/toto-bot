@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "@/components/Header";
 import Chat from "../components/chat";
 import Menu from "@/components/Menu";
@@ -15,17 +16,20 @@ export default function Page() {
   const { chatState, handleChatSubmit, handleInputChange, input, dispatch } =
     useChatHandlers();
   return (
-    <main className=" min-h-svh w-full   bg-green-200 bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
-      <Header isOpen={isOpen} toggle={toggle} />
-      <Menu isOpen={isOpen}>
-        <ChatHistory chatState={chatState} dispatch={dispatch} />
-      </Menu>
-      <Chat
-        chatState={chatState}
-        handleChatSubmit={handleChatSubmit}
-        handleInputChange={handleInputChange}
-        input={input}
-      />
-    </main>
+    <>
+      <ToastContainer />
+      <main className=" min-h-svh w-full   bg-green-200 bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
+        <Header isOpen={isOpen} toggle={toggle} />
+        <Menu isOpen={isOpen}>
+          <ChatHistory chatState={chatState} dispatch={dispatch} />
+        </Menu>
+        <Chat
+          chatState={chatState}
+          handleChatSubmit={handleChatSubmit}
+          handleInputChange={handleInputChange}
+          input={input}
+        />
+      </main>
+    </>
   );
 }
