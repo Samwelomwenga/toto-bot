@@ -1,12 +1,12 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
+import { Slide, toast } from "react-toastify";
 
 type HistoryState = {
   loading: boolean;
   error: { message: string; isError: boolean } | null;
   history: Conversation[];
 };
-
 function useHistory() {
   const [historyState, setHistorySate] = useState<HistoryState>({
     loading: false,
@@ -38,6 +38,17 @@ function useHistory() {
           ...prevState,
           error: { message: error.message, isError: true },
         }));
+        toast.error("An Error Occurred", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Slide,
+        });
       } finally {
         setHistorySate((prevState) => ({ ...prevState, loading: false }));
       }
@@ -46,9 +57,57 @@ function useHistory() {
 
     const channel = supabase
       .channel("conversations changes")
-      .on("postgres_changes", { event: "*", schema: "public" }, (payload) => {
-        console.log("Change received", payload);
-      })
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public" },
+        (payload) => {
+          const { errors } = payload;
+          if (errors) {
+            toast.error("An Error Occurred", {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              transition: Slide,
+            });
+          }
+          setHistorySate((prevState) => ({
+            ...prevState,
+            history: [payload.new as Conversation, ...prevState.history],
+          }));
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public" },
+        (payload) => {
+          const { errors, old } = payload;
+          if (errors) {
+            toast.error("An Error Occurred", {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              transition: Slide,
+            });
+          }
+          setHistorySate((prevState) => ({
+            ...prevState,
+            history: prevState.history.filter(
+              (conversation) =>
+                conversation.conversation_id !== old.conversation_id
+            ),
+          }));
+        }
+      )
       .subscribe();
     return () => {
       channel.unsubscribe();
