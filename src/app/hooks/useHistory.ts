@@ -19,14 +19,15 @@ function useHistory() {
         setHistorySate((prevState) => ({ ...prevState, loading: true }));
         const userUId = (await supabase.auth.getSession()).data.session?.user
           .id;
-          if (!userUId) {
-            throw new Error("User UID is not available");
-          }
+        if (!userUId) {
+          throw new Error("User UID is not available");
+        }
 
         const { data, error } = await supabase
           .from("conversations")
           .select("*")
-          .eq("User UID", userUId).order("created_at", { ascending: false});
+          .eq("User UID", userUId)
+          .order("created_at", { ascending: false });
         if (error) {
           throw new Error(error.message);
         }
@@ -42,6 +43,16 @@ function useHistory() {
       }
     };
     getChatHistory();
+
+    const channel = supabase
+      .channel("conversations changes")
+      .on("postgres_changes", { event: "*", schema: "public" }, (payload) => {
+        console.log("Change received", payload);
+      })
+      .subscribe();
+    return () => {
+      channel.unsubscribe();
+    };
   }, []);
 
   return historyState;
