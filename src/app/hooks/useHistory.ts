@@ -59,7 +59,7 @@ function useHistory() {
       .channel("conversations changes")
       .on(
         "postgres_changes",
-        { event: "UPDATE", schema: "public" },
+        { event: "INSERT", schema: "public" },
         (payload) => {
           const { errors } = payload;
           if (errors) {
