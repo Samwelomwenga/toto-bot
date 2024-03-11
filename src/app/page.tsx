@@ -7,6 +7,7 @@ import Chat from "../components/chat";
 import Menu from "@/components/Menu";
 import useChatHandlers from "./hooks/useChatHandlers";
 import ChatHistory from "@/components/ChatHistory";
+import Logo from "@/components/Logo";
 
 export const runtime = "edge";
 
@@ -18,11 +19,14 @@ export default function Page() {
   return (
     <>
       <ToastContainer />
-      <main className=" min-h-svh w-full   bg-green-200 bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
+      <main className=" min-h-svh w-full bg-green-200 bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
         <Header isOpen={isOpen} toggle={toggle} />
         <Menu isOpen={isOpen}>
           <ChatHistory chatState={chatState} dispatch={dispatch} />
         </Menu>
+        <div className="hidden md:block">
+        <Logo />
+        </div>
         <Chat
           chatState={chatState}
           handleChatSubmit={handleChatSubmit}
