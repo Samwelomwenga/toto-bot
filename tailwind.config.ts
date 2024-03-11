@@ -30,6 +30,14 @@ const config: Config = {
         // Define your animation here
         "fade-in-right": "fade-in-right 0.7s ease-out",
       },
+      colors: {
+        "salmon": "#FA7C92",
+        "rain": "#6EC4DB",
+        "butter-milk": "#FFF7C0",
+        "leaf":"#66AB8C",
+        "bright-yellow":"#FAD94C",
+        "grayish-brown":"#9C8075",
+      },
 
       
         
