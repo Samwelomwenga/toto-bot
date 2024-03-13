@@ -7,7 +7,7 @@ function Header({ isOpen, toggle }: { isOpen: boolean; toggle: () => void }) {
   return (
     <header className="text-black bg-teal-600  w-full px-3 py-4 shadow-lg sticky md:hidden">
       <div className="flex justify-between align-middle bg-teal-600">
-        <Logo/>
+        <Logo isLogo={true}/>
         {!isOpen ? (
           <SlMenu
             className={` w-7 h-7 text-orange-400 transition-transform duration-700 ease-in-out ${
