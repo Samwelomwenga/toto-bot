@@ -5,6 +5,7 @@ import Image from "next/image";
 import { IoSend } from "react-icons/io5";
 import loadingGif from "../../public/loading.gif";
 import { ChatInitialState } from "@/app/hooks/useChatHandlers";
+import Logo from "./Logo";
 
 type MyComponentProps = {
   chatState: ChatInitialState;
@@ -21,10 +22,11 @@ export default function MyComponent({
   handleInputChange,
   input,
 }: MyComponentProps) {
+  const { messages } = chatState;
   return (
     <div className="mx-auto w-full px-1 py-2 md:col-start-3 md:col-span-3 mb-20 h-full">
       <ul className="space-y-3 w-full md:space-y-6 md:py-8 mb-4">
-        {chatState.messages.length > 0 &&
+        {messages.length ? (
           chatState.messages.map((m) => (
             <li
               key={m.id}
@@ -43,7 +45,16 @@ export default function MyComponent({
                 m.content
               )}
             </li>
-          ))}
+          ))
+        ) : (
+          <div className="absolute top-1/2 md:left-[40%] w-full md:w-[40ch] grid mx-auto px-1">
+            <Logo/>
+            <p className=" text-black text-center">
+              Hello, for any assistance in nurturing babies, 
+              feel free to ask below. 
+            </p>
+          </div>
+        )}
       </ul>
 
       <form
