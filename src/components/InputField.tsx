@@ -2,12 +2,17 @@ import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
+type SignUpFieldProps = UseFormRegister<{
+  name: string;
+  email: string;
+  password: string;
+}>;
+type loginFieldProps = UseFormRegister<{
+  email: string;
+  password: string;
+}>;
 type InputFieldProps = {
-  register: UseFormRegister<{
-    name: string;
-    email: string;
-    password: string;
-  }>;
+  register: SignUpFieldProps;
   placeholder: string;
   type: string;
   name: "name" | "email" | "password";
@@ -21,6 +26,9 @@ function InputField({ register, placeholder, type, name }: InputFieldProps) {
   return (
     <div className="relative">
       <input
+      // Error
+      // This expression is not callable.
+      // Each member of the union type 'SignUpFieldProps | loginFieldProps' has signatures, but none of those signatures are compatible with each other.ts(2349)
         {...register(name)}
         className="block  w-full my-2 py-3 px-4 rounded"
         placeholder={placeholder}

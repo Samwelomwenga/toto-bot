@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useSignup from "../hooks/useSignup";
 import ConfirmEmailPrompt from "@/components/ConfirmEmailPrompt";
+import InputField from "@/components/InputField";
 
 export default function Signup() {
   const {
@@ -14,13 +15,12 @@ export default function Signup() {
     handleSignup,
     isEmailVerified,
   } = useSignup();
-  console.log("confirm", isEmailVerified);
 
   return (
     <>
       <ToastContainer />
       <main className="bg-green-200 h-svh w-full  text-black">
-        {isEmailVerified===false && <ConfirmEmailPrompt/>}
+        {isEmailVerified === false && <ConfirmEmailPrompt />}
         <h1 className="text-4xl font-semibold text-center pt-24 pb-10">
           Sign Up
         </h1>
@@ -38,35 +38,37 @@ export default function Signup() {
             {" "}
             Name
           </label>
-          <input
-            {...register("name")}
-            className="block  w-full my-2 py-3 px-4 rounded"
+          <InputField
+            register={register}
             placeholder="e.g Jane Doe"
-            type="text"
+            type="name"
+            name="name"
           />
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
           <label className=" text-lg font-semibold" htmlFor="email">
             {" "}
             Email
           </label>
-          <input
-            {...register("email")}
-            className="block  w-full my-2 py-3 px-4 rounded"
-            placeholder="e.g johndoe@gmail.com"
+          <InputField
+            register={register}
+            placeholder="e.g johndoe@gmail.com "
             type="email"
+            name="email"
           />
+
           {errors.email && (
             <p className="text-red-500">{errors.email.message}</p>
           )}
           <label className=" text-lg font-semibold" htmlFor="password">
             Password
           </label>
-          <input
-            {...register("password")}
-            className="block  w-full my-2 py-3 px-4 rounded"
+          <InputField
+            register={register}
             placeholder="Enter your password..."
             type="password"
+            name="password"
           />
+
           {errors.password && (
             <p className="text-red-500">{errors.password.message}</p>
           )}
