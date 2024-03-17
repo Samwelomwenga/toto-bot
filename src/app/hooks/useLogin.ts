@@ -94,7 +94,36 @@ function useLogin() {
       setIsLoading(false);
     }
   };
-  return { register, handleSubmit, errors, isLoading, handleLogin };
+  const handleLogInWithGoogle = async () => {
+    try {
+      setIsLoading(true);
+      let { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      })
+
+      if (error) {
+        throw new Error(error.message);
+      }  
+      router.refresh();
+    } catch (e) {
+      const error = e as Error;
+      console.log(error);
+      toast.error(`${error.message}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  return { register, handleSubmit, errors, isLoading, handleLogin, handleLogInWithGoogle};
 }
 
 export default useLogin;

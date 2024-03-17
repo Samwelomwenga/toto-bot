@@ -1,5 +1,5 @@
 "use client";
-
+import { FcGoogle } from "react-icons/fc";
 import { ImSpinner9 } from "react-icons/im";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,16 +7,16 @@ import "react-toastify/dist/ReactToastify.css";
 import useLogin from "../hooks/useLogin";
 
 export default function Login() {
-  const { register, handleSubmit, errors, isLoading, handleLogin } = useLogin();
+  const { register, handleSubmit, errors, isLoading, handleLogin,handleLogInWithGoogle } = useLogin();
 
   return (
     <>
       <ToastContainer />
-      <main className="bg-green-200 h-svh w-full  text-black">
-        <h1 className="text-4xl font-semibold text-center pt-24 pb-10">
+      <main className="bg-green-200 h-svh w-full  text-black grid place-items-center">
+        <h1 className="text-4xl font-semibold text-center">
           Login
         </h1>
-        <p className="text-center text-xl pb-10">
+        <p className="text-center text-xl">
           <span className="block font-bold">Welcome back!</span> Login to your
           account
         </p>
@@ -55,10 +55,21 @@ export default function Login() {
           )}
           <button
             disabled={isLoading}
-            className="bg-orange-400 py-3 px-16 mx-12 mt-14 mb-8 text-lg font-medium rounded-md border-none text-center  hover:text-orange-400 hover:bg-green-200 transition-2000"
+            className="bg-orange-400 py-3 px-16 mx-12 mt-14 mb-8 text-lg font-medium rounded-md border-none text-center  hover:bg-orange-200 transition-2000"
           >
             {" "}
             {isLoading ? <ImSpinner9 /> : "Login"}{" "}
+          </button>
+         
+       
+        </form>
+        <button
+            onClick={handleLogInWithGoogle}
+            className="flex place-items-center gap-4 ring-orange-400 ring-2  py-3 px-4 mx-auto  text-lg font-medium rounded-md  text-center  hover:bg-orange-200 hover:ring-0  transition-2000"
+          >
+            {" "}
+            <FcGoogle size={24}/>
+            {isLoading ? <ImSpinner9 /> : <p>Login with Google</p>}{" "}
           </button>
           <a
             href="/signup"
@@ -66,7 +77,6 @@ export default function Login() {
           >
             Don`t have an account? Sign up
           </a>
-        </form>
       </main>
     </>
   );
