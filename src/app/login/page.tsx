@@ -63,6 +63,7 @@ export default function Login() {
          
        
         </form>
+        <a href="/recover" className=" text-left">forgot password?</a>
         <button
             onClick={handleLogInWithGoogle}
             className="flex place-items-center gap-4 ring-orange-400 ring-2  py-3 px-4 mx-auto  text-lg font-medium rounded-md  text-center  hover:bg-orange-200 hover:ring-0  transition-2000"

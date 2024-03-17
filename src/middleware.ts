@@ -16,7 +16,8 @@ export async function middleware(req: NextRequest) {
     error,
   } = await supabase.auth.getSession();
   const isSignUpPath = req.nextUrl.pathname.includes("/signup");
-  if (!session && !isSignUpPath) {
+  const isRecoverPath = req.nextUrl.pathname.includes("/recover");
+  if (!session && !isSignUpPath&&!isRecoverPath) {
     return NextResponse.rewrite(new URL("/login", req.url));
   }
 
