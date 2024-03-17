@@ -74,6 +74,7 @@ function useSignup() {
     ?.email_verified as boolean;
 
   const handleSignup = async (formData: SignupData) => {
+    setIsLoading(true);
     try {
       const { data, error } = await supabase.auth.signUp({
         email: formData.email,
@@ -127,7 +128,7 @@ function useSignup() {
   const handleSignUpWithGoogle = async () => {
     try {
       setIsLoading(true);
-      let { data, error } = await supabase.auth.signInWithOAuth({
+      let {  error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
       })
       if (error) {
