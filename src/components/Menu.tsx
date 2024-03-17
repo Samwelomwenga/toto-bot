@@ -15,10 +15,11 @@ function Menu({ isOpen, children }: MenuProps) {
     const {
       data: { session },
     } = await supabase.auth.getSession();
-    const userName: string = session
-      ? session.user.user_metadata.user_name
-      : "Anonymous User";
-    setUserName(userName);
+    if(session){
+    const userName: string = session.user.user_metadata.user_name
+      ??session.user.user_metadata.full_name;
+      setUserName(userName);
+    }
   };
   getUserName();
   return (

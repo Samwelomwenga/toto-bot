@@ -15,9 +15,9 @@ function Profile({ userName }:ProfileProps) {
   return (
     <div className="fixed bottom-4 left-6 w-3/4 md:w-auto" onClick={handleProfileClick}>
       {isShown?<LogOut />:null}
-      <div className={`flex gap-10 align-middle w-full   md:pl-4 md:pr-8 py-2 ${isShown&&"bg-teal-500"} hover:cursor-pointer hover:bg-teal-500 rounded `}>
+      <div className={`flex gap-3 align-middle w-full pl-3   md:pl-4 md:pr-8 py-2 ${isShown&&"bg-teal-500"} hover:cursor-pointer hover:bg-teal-500 rounded `}>
         <Avatar userName={userName} />
-        <p>{userName}</p>
+        <p className=" text-center">{userName}</p>
       </div>
     </div>
   );
