@@ -93,7 +93,6 @@ function useSignup() {
       if (!identities?.length) {
         throw new Error("User already exists! Please login.");
       }
-      console.log("user", data.user, "session", data.session);
       setUser(data.user);
       toast.success("SignedUP!", {
         position: "top-center",
@@ -125,9 +124,38 @@ function useSignup() {
       setIsLoading(false);
     }
   };
+  const handleSignUpWithGoogle = async () => {
+    try {
+      setIsLoading(true);
+      let { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      })
+      if (error) {
+        throw new Error(error.message);
+      }
+      router.refresh();
+    } catch (e) {
+      const error = e as Error;
+      console.log(error.message);
+      toast.error(`${error.message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
   return {
     register,
     handleSubmit,
+    handleSignUpWithGoogle,
     errors,
     isLoading,
     handleSignup,
