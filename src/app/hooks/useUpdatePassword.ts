@@ -63,15 +63,17 @@ function useUpdatePassword() {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const handleUpdatePassword = async (data: UpdatePasswordData) => {
+  const handleUpdatePassword = async (formData: UpdatePasswordData) => {
     setIsLoading(true);
-    const { email, password } = data;
+    const { email, password } = formData;
+    console.log("email", email,"password",password);
     try {
       const { data, error } = await supabase.auth.updateUser({
         email: email,
         password: password,
       });
       if (error) {
+        console.error(error.message);
         throw new Error(error.message);
       }
       console.log(data);

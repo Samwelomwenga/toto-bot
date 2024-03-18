@@ -1,3 +1,4 @@
+"use client"
 import { ImSpinner9 } from "react-icons/im";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
