@@ -83,7 +83,7 @@ function useSignup() {
           data: {
             user_name: formData.name,
           },
-          emailRedirectTo: `${location.origin}/auth/callback`,
+          emailRedirectTo: `${location.origin}`,
         },
       });
 
