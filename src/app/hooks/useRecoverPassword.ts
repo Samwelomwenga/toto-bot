@@ -4,6 +4,7 @@ import { Slide, toast } from "react-toastify";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "../utils/supabase";
+import { useRouter } from "next/navigation";
 
 const RecoverPasswordSchema = z.object({
   email: z
@@ -42,13 +43,16 @@ function useRecoverPassword() {
     }
   );
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
 
   const handleRecoverPassword = async (formData: RecoverPasswordData) => {
     setIsLoading(true);
     try {
       const { email } = formData;
-      let { data,error } = await supabase.auth.resetPasswordForEmail(email);
-      console.log(data);
+      let {error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${location.origin}/update`,
+        });
       if (error) {
         throw new Error(error.message);
       }
@@ -63,6 +67,7 @@ function useRecoverPassword() {
         theme: "colored",
         transition: Slide,
       });
+      router.refresh();
     } catch (e) {
       const error = e as Error;
       console.log(error.message);
