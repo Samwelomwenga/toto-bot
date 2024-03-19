@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { supabase } from "../utils/supabase";
 import { Slide, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const updatePasswordSchema = z
   .object({
@@ -61,6 +62,7 @@ function useUpdatePassword() {
   } = useForm<UpdatePasswordData>({
     resolver: zodResolver(updatePasswordSchema),
   });
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
   const handleUpdatePassword = async (formData: UpdatePasswordData) => {
@@ -88,6 +90,7 @@ function useUpdatePassword() {
         theme: "colored",
         transition: Slide,
       });
+      router.push("/");
     } catch (e) {
       const error = e as Error;
       console.error(error.message);
