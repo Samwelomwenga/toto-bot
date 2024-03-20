@@ -98,13 +98,13 @@ function useLogin() {
     try {
       setIsLoading(true);
       let { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-      })
+        provider: "google",
+      });
 
       if (error) {
         throw new Error(error.message);
-      }  
-      router.refresh();
+      }
+      router.push("/");
     } catch (e) {
       const error = e as Error;
       console.log(error);
@@ -122,8 +122,15 @@ function useLogin() {
     } finally {
       setIsLoading(false);
     }
-  }
-  return { register, handleSubmit, errors, isLoading, handleLogin, handleLogInWithGoogle};
+  };
+  return {
+    register,
+    handleSubmit,
+    errors,
+    isLoading,
+    handleLogin,
+    handleLogInWithGoogle,
+  };
 }
 
 export default useLogin;
