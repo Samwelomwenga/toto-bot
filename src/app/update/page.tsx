@@ -3,6 +3,8 @@ import { ImSpinner9 } from "react-icons/im";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useUpdatePassword from "../hooks/useUpdatePassword";
+import { Input } from "postcss";
+import InputField from "@/components/InputField";
 
 export default function Update() {
   const { register, handleSubmit, errors,isLoading,handleUpdatePassword  } =useUpdatePassword();
@@ -22,45 +24,15 @@ export default function Update() {
           onSubmit={handleSubmit(handleUpdatePassword)}
           className=" bg-teal-400   px-6 pt-20  pb-10 rounded mx-6 md:mx-auto md:w-96 "
         >
-          <label className=" text-lg font-semibold" htmlFor="email">
-            {" "}
-            Email
-          </label>
-          <input
-            {...register("email")}
-            type="email"
-            className={`block  w-full  py-3 px-4 my-3 rounded-md border-2 border-${
-              !errors.email ? "gray" : "red"
-            }-300 focus:border-none  hover:cursor-pointer`}
-            placeholder="e.g johndoe@gmail.com"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
+         
            <label className=" text-lg font-semibold" htmlFor="password">
             Password
           </label>
-          <input
-            {...register("password")}
-            type="password"
-            className="block  w-full my-2 py-3 px-4 rounded"
-            placeholder="Enter your password..."
-          />
+          <InputField register={register} type="password" name="password" placeholder="password"/>
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
-           <label className=" text-lg font-semibold" htmlFor="password">
-            Confirm Password
-          </label>
-          <input
-            {...register("confirmPassword")}
-            type="password"
-            className="block  w-full my-2 py-3 px-4 rounded"
-            placeholder="Enter your password..."
-          />
-          {errors.password && (
-            <p className="text-red-500 text-sm">{errors.confirmPassword?.message}</p>
-          )}
+           
          
 
           <button
