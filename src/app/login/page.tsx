@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import useLogin from "../hooks/useLogin";
+import InputField from "@/components/InputField";
 
 export default function Login() {
   const { register, handleSubmit, errors, isLoading, handleLogin,handleLogInWithGoogle } = useLogin();
@@ -30,26 +31,14 @@ export default function Login() {
             {" "}
             Email
           </label>
-          <input
-            {...register("email")}
-            type="email"
-            className={`block  w-full  py-3 px-4 my-3 rounded-md border-2 border-${
-              !errors.email ? "gray" : "red"
-            }-300 focus:border-none  hover:cursor-pointer`}
-            placeholder="e.g johndoe@gmail.com"
-          />
+          <InputField register={register} type="email" name="email" placeholder="johndoe@gmail.com"/>
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
+            )}
           <label className=" text-lg font-semibold" htmlFor="password">
             Password
           </label>
-          <input
-            {...register("password")}
-            type="password"
-            className="block  w-full my-2 py-3 px-4 rounded"
-            placeholder="Enter your password..."
-          />
+            <InputField register={register} type="password" name="password" placeholder="Enter your password..."/>
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
