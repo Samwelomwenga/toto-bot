@@ -3,6 +3,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useRecoverPassword from "../hooks/useRecoverPassword";
+import InputField from "@/components/InputField";
 
 export default function Recover() {
   const { register, handleSubmit, errors, isLoading, handleRecoverPassword } =
@@ -26,14 +27,7 @@ export default function Recover() {
             {" "}
             Email
           </label>
-          <input
-            {...register("email")}
-            type="email"
-            className={`block  w-full  py-3 px-4 my-3 rounded-md border-2 border-${
-              !errors.email ? "gray" : "red"
-            }-300 focus:border-none  hover:cursor-pointer`}
-            placeholder="e.g johndoe@gmail.com"
-          />
+         <InputField register={register} type="email" name="email" placeholder="johndoe@gmail.com"/>
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
