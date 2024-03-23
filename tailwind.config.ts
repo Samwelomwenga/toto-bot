@@ -37,6 +37,10 @@ const config: Config = {
         "leaf":"#66AB8C",
         "bright-yellow":"#FAD94C",
         "grayish-brown":"#9C8075",
+        "bright-orange":"#E76801",
+        "yellow-green":"#63B201",
+        "bluish-cyan":"#3A9AD9",
+        "greenish-cyan":"##3EB489",
       },
 
       
