@@ -40,7 +40,7 @@ const config: Config = {
         "bright-orange":"#E76801",
         "yellow-green":"#63B201",
         "bluish-cyan":"#3A9AD9",
-        "greenish-cyan":"##3EB489",
+        "greenish-cyan":"#3EB489",
       },
 
       
