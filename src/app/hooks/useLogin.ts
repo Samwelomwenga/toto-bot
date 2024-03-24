@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -54,6 +54,21 @@ function useLogin() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_IN") {
+          router.push("/");
+        }
+      }
+    );
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }
+  , [router]);
+
+
   const handleLogin = async (data: FormData) => {
     try {
       setIsLoading(true);
@@ -104,7 +119,6 @@ function useLogin() {
       if (error) {
         throw new Error(error.message);
       }
-      router.push("/");
     } catch (e) {
       const error = e as Error;
       console.log(error);

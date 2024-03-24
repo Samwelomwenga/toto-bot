@@ -67,7 +67,7 @@ function useRecoverPassword() {
         theme: "colored",
         transition: Slide,
       });
-      router.refresh();
+      router.push("/update");
     } catch (e) {
       const error = e as Error;
       console.log(error.message);
