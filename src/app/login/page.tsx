@@ -13,10 +13,8 @@ export default function Login() {
   return (
     <>
       <ToastContainer />
-      <main className="bg-green-200 h-svh w-full  text-black grid place-items-center">
-        <h1 className="text-4xl font-semibold text-center">
-          Login
-        </h1>
+      <main className=" bg-gray-300 h-svh w-full  text-black grid place-items-center">
+        <h1 className="text-4xl font-semibold text-center">Login</h1>
         <p className="text-center text-xl">
           <span className="block font-bold">Welcome back!</span> Login to your
           account
