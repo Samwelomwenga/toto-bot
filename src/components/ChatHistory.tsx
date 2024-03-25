@@ -11,12 +11,12 @@ export type ChatHistoryProps = {
 };
 
 function ChatHistory({ chatState, dispatch }: ChatHistoryProps) {
-  const { history } = useHistory();
+  const { history,loading } = useHistory();
   return (
     <div className=" fixed top-20 left-4 bottom-20 w-64 md:w-60 p-3">
-      <h2 className="text-center text-lg font-bold">Chat History</h2>
+      <h2 className="text-center text-yellow-green text-lg font-bold">Chat History</h2>
       <div className="overflow-y-auto">
-        {history.length > 0 ? (
+        {history.length ? (
           history.map((chat) => (
             <History
               key={chat.conversation_id}
@@ -26,9 +26,9 @@ function ChatHistory({ chatState, dispatch }: ChatHistoryProps) {
               dispatch={dispatch}
             />
           ))
-        ) : (
-          <p className="text-center ">No chat history</p>
-        )}
+        ) : 
+          loading?<p className="text-center">Loading...</p>:<p className="text-center ">No chat history</p>
+        }
       </div>
     </div>
   );

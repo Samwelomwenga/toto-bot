@@ -18,9 +18,9 @@ function History({
   const parsedMessages: Message[] = JSON.parse(messages);
   const { handleDeleteHistory } = useDeleteHistory();
   return (
-    <div className="p-2 border-b-2 border-gray-600 hover:cursor-pointer flex justify-between">
+    <div className="p-2 border-b-2 border-yellow-green hover:cursor-pointer flex justify-between">
       <div className=" w-11/12" onClick={() => handleHistoryClick(conversation_id)}>
-        <p className="text-xs whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+        <p className=" text-xs whitespace-nowrap overflow-x-hidden overflow-ellipsis">
           {parsedMessages[0].content}
         </p>
       </div>

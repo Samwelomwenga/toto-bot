@@ -13,9 +13,9 @@ function Profile({ userName }:ProfileProps) {
     setIsShown(!isShown)
   }
   return (
-    <div className="fixed bottom-4 left-6 w-3/4 md:w-auto" onClick={handleProfileClick}>
+    <div className="fixed bottom-4 left-4 w-60" onClick={handleProfileClick}>
       {isShown?<LogOut />:null}
-      <div className={`flex gap-3 align-middle w-full pl-3   md:pl-4 md:pr-8 py-2 ${isShown&&"bg-teal-500"} hover:cursor-pointer hover:bg-teal-500 rounded `}>
+      <div className={`flex gap-3 align-middle w-full pl-3   md:pl-4 md:pr-8 py-2 ${isShown&&"bg-bluish-cyan"} hover:cursor-pointer hover:bg-bluish-cyan rounded `}>
         <Avatar userName={userName} />
         <p className=" text-center">{userName}</p>
       </div>
@@ -24,7 +24,7 @@ function Profile({ userName }:ProfileProps) {
 }
 function Avatar({ userName }: { userName: string }) {
   return (
-    <div className=" bg-red-400 rounded-full w-10 text-center ">
+    <div className=" bg-grayish-brown rounded-full w-10 text-center ">
       <p className="p-2">{getInitials(userName)}</p>
     </div>
   );
@@ -38,7 +38,7 @@ function LogOut() {
     router.refresh();
   };
   return (
-    <div className=" py-3 text-center font-bold rounded mb-3 px-3 bg-orange-500 hover:cursor-pointer" onClick={handleSignOut}>
+    <div className=" py-3 text-center hover:text-bright-orange font-bold rounded mb-3 px-3 bg-bright-orange hover:cursor-pointer hover:ring-2 hover:ring-bright-orange hover:bg-transparent" onClick={handleSignOut}>
       LogOut
     </div>
   );

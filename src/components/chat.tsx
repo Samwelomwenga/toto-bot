@@ -27,22 +27,24 @@ export default function MyComponent({
     <div className="mx-auto w-full px-1 py-2 md:col-start-3 md:col-span-3 mb-20 h-full">
       <ul className="space-y-3 w-full md:space-y-6 md:py-8 mb-4">
         {messages.length ? (
-          chatState.messages.map((m) => (
-            <li
-              key={m.id}
-              className={`p-2 md:p-6 rounded ${
-                m.role !== "user" ? "bg-orange-200" : "bg-teal-400"
+          chatState.messages.map((message) => (
+            chatState.loadingMessages?
+            <Image key={message.id} src={loadingGif} alt="loading" />
+            :<li
+              key={message.id}
+              className={`p-2 md:p-6 text-white rounded ${
+                message.role === "user" ? "bg-greenish-cyan" : "bg-salmon"
               } ${
-                m.role === "user" ? "mr-auto" : "ml-auto"
-              } shadow text-gray-700 ${m.role === "user" ? "w-3/4" : "w-5/6"} `}
+                message.role === "user" ? "mr-auto" : "ml-auto"
+              } shadow text-gray-700 ${message.role === "user" ? "w-3/4" : "w-5/6"} `}
             >
               <span className="font-semibold">
-                {m.role === "user" ? "User: " : "BOT: "}
+                {message.role === "user" ? "User: " : "BOT: "}
               </span>
               {chatState.loadingMessages ? (
                 <Image src={loadingGif} alt="loading" />
               ) : (
-                m.content
+                message.content
               )}
             </li>
           ))
@@ -65,7 +67,7 @@ export default function MyComponent({
       >
         <input
           className={
-            " w-4/5 rounded border shadow-sm text-gray-700 pl-3 md:py-4 md:px-3"
+            " w-4/5 rounded border shadow-sm text-gray-700 pl-3 md:py-4 md:px-3 border-leaf focus:outline-none focus:ring-2 focus:ring-bright-orange focus:border-none"
           }
           value={input}
           onChange={handleInputChange}
@@ -74,9 +76,9 @@ export default function MyComponent({
 
         <button
           type="submit"
-          className=" bg-orange-500 hover:bg-orange-700 text-white font-bold py-3 px-5 md:px-8 rounded focus:outline-none focus:shadow-outline"
+          className=" bg-bright-orange hover:bg-transparent hover:ring-2 hover:ring-bright-orange hover:text-bright-orange text-white font-bold py-3 px-5 md:px-8 rounded focus:outline-none focus:shadow-outline"
         >
-          <IoSend className=" md:w-6 md:h-6 " />
+          <IoSend className=" md:w-6 md:h-6" />
         </button>
       </form>
     </div>

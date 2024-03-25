@@ -20,7 +20,7 @@ export default function Page() {
   return (
     <>
       <ToastContainer />
-      <main className=" min-h-svh w-full bg-white bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
+      <main className=" min-h-svh w-full bg-gray-300 bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
         <Header isOpen={isOpen} toggle={toggle} />
         <Menu isOpen={isOpen}>
           <ChatHistory chatState={chatState} dispatch={dispatch} />

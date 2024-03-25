@@ -12,7 +12,7 @@ export default function Recover() {
   return (
     <>
       <ToastContainer />
-      <main className="bg-green-200 h-svh w-full  text-black grid place-items-center">
+      <main className="bg-gray-300 h-svh w-full  text-black grid place-items-center">
         <h1 className="text-4xl font-semibold text-center">Recover Password</h1>
         <p className="text-center text-xl">
           Please enter email to recover your password
@@ -21,7 +21,7 @@ export default function Recover() {
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit(handleRecoverPassword)}
-          className=" bg-teal-400   px-6 pt-20  pb-10 rounded mx-6 md:mx-auto md:w-96 "
+          className=" bg-greenish-cyan   px-6 pt-20  pb-10 rounded mx-6 md:mx-auto md:w-96 "
         >
           <label className=" text-lg font-semibold" htmlFor="email">
             {" "}
@@ -35,7 +35,7 @@ export default function Recover() {
 
           <button
             disabled={isLoading}
-            className="bg-orange-400 py-3 px-16 mx-12 mt-14 mb-8 text-lg font-medium rounded-md border-none text-center  hover:bg-orange-200 transition-2000"
+            className="bg-bright-orange py-3 px-16 mx-12 mt-14 mb-8 text-lg text-white hover:text-bright-orange font-medium rounded-md border-none text-center  hover:bg-transparent hover:ring-2 hover:ring-bright-orange transition-2000"
           >
             {" "}
             {isLoading ? <ImSpinner9 /> : <p>Recover</p>}{" "}
@@ -44,7 +44,7 @@ export default function Recover() {
 
         <a
           href="/login"
-          className="text-center block hover:cursor-pointer hover:text-orange-400"
+          className="text-center block hover:cursor-pointer hover:text-bright-orange"
         >
           Back to login
         </a>

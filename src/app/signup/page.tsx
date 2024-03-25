@@ -21,7 +21,7 @@ export default function Signup() {
   return (
     <>
       <ToastContainer />
-      <main className="bg-green-200 h-svh w-full  text-black grid place-items-center">
+      <main className="bg-gray-300 h-svh w-full  text-black grid place-items-center">
         {isEmailVerified === false && <ConfirmEmailPrompt />}
         <h1 className="text-4xl font-semibold text-center">Sign Up</h1>
         <p className="text-center text-xl">
@@ -31,7 +31,7 @@ export default function Signup() {
         <form
           noValidate
           autoComplete="off"
-          className=" bg-teal-400   px-6 pt-20  pb-10 rounded mx-6 md:mx-auto md:w-96  "
+          className=" bg-greenish-cyan shadow-lg   px-6 pt-20  pb-10 rounded mx-6 md:mx-auto md:w-96  "
           onSubmit={handleSubmit(handleSignup)}
         >
           <label className=" text-lg font-semibold" htmlFor="email">
@@ -74,7 +74,7 @@ export default function Signup() {
           )}
           <button
             disabled={isLoading}
-            className="bg-orange-400 py-3 px-16 mx-12 mt-14 mb-8 text-lg font-medium rounded-md border-none text-center  hover:bg-orange-300 transition-2000"
+            className="bg-bright-orange py-3 px-16 mx-12 mt-14 mb-8 text-lg text-white font-medium rounded-md border-none text-center hover:text-bright-orange hover:bg-transparent hover:ring-2 hover:ring-bright-orange transition-2000"
           >
             {" "}
             {isLoading ? <ImSpinner9 /> : <p>SIGN UP</p>}{" "}
@@ -82,14 +82,14 @@ export default function Signup() {
         </form>
         <button
           onClick={handleSignUpWithGoogle}
-          className="flex place-items-center gap-4 ring-orange-400 ring-2  py-3 px-4 mx-auto  text-lg font-medium rounded-md  text-center  hover:bg-orange-200 hover:ring-0  transition-2000"
+          className="flex place-items-center gap-4 ring-bright-orange ring-2  py-3 px-4 mx-auto  text-lg font-medium rounded-md  text-center  hover:bg-orange-200 hover:ring-0  transition-2000"
         >
           <FcGoogle size={24} />
-          {isLoading ? <ImSpinner9 /> : <p>Sign Up with Google</p>}{" "}
+           <p>Sign Up with Google</p>{" "}
         </button>
         <a
           href="/login"
-          className="text-center block hover:cursor-pointer hover:text-orange-400"
+          className="text-center block hover:cursor-pointer hover:text-bright-orange"
         >
           You have an account? login
         </a>
