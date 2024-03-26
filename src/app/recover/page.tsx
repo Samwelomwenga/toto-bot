@@ -44,7 +44,7 @@ export default function Recover() {
 
         <a
           href="/login"
-          className="text-center block hover:cursor-pointer hover:text-bright-orange"
+          className="text-center block hover:cursor-pointer hover:text-bright-orange mb-48"
         >
           Back to login
         </a>

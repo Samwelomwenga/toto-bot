@@ -29,7 +29,7 @@ export default function Login() {
         <form
           noValidate
           autoComplete="off"
-          className="px-6 pt-20  pb-10 rounded mx-6 md:mx-auto md:w-96 bg-greenish-cyan shadow-lg"
+          className="p-6 rounded mx-6 md:mx-auto md:w-96 bg-greenish-cyan shadow-lg"
           onSubmit={handleSubmit(handleLogin)}
         >
           <label className=" text-lg font-semibold" htmlFor="email">
@@ -57,31 +57,32 @@ export default function Login() {
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
+          <p className="text-right pt-4">
+        <a href="/recover" className=" hover:text-bright-orange">
+          forgot password?
+        </a></p>
           <button
             disabled={isLoading}
-            className=" bg-bright-orange py-3 px-16 mx-12 mt-14 mb-8 text-lg text-white hover:text-bright-orange font-medium rounded-md border-none text-center hover:ring-2 hover:bg-transparent hover:ring-bright-orange transition-2000"
+            className=" bg-bright-orange py-3 px-16 mx-12 my-8 text-lg text-white hover:text-bright-orange font-medium rounded-md border-none text-center hover:ring-2 hover:bg-transparent hover:ring-bright-orange transition-2000"
           >
             {" "}
             {isLoading ? <ImSpinner9 /> : "Login"}{" "}
           </button>
-        </form>
-        <a href="/recover" className=" text-left hover:text-bright-orange">
-          forgot password?
-        </a>
-        <button
-          onClick={handleLogInWithGoogle}
-          className="flex place-items-center gap-4 ring-bright-orange ring-2  py-3 px-4 mx-auto  text-lg font-medium rounded-md  text-center  hover:bg-orange-200 hover:ring-0  transition-2000"
-        >
-          {" "}
-          <FcGoogle size={24} />
-           <p>Login with Google</p>{" "}
-        </button>
         <a
           href="/signup"
           className="text-center block hover:cursor-pointer hover:text-bright-orange"
         >
           Don`t have an account? Sign up
         </a>
+        </form>
+        <button
+          onClick={handleLogInWithGoogle}
+          className="flex place-items-center gap-4 ring-bright-orange ring-2  py-3 px-4 mx-auto mb-40 lg:mb-10  text-lg font-medium rounded-md  text-center  hover:bg-orange-200 hover:ring-0  transition-2000"
+        >
+          {" "}
+          <FcGoogle size={24} />
+           <p>Login with Google</p>{" "}
+        </button>
       </main>
     </>
   );

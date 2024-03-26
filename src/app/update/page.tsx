@@ -46,7 +46,7 @@ export default function Update() {
 
         <a
           href="/login"
-          className="text-center block hover:cursor-pointer hover:text-bright-orange"
+          className="text-center block hover:cursor-pointer hover:text-bright-orange mb-52"
         >
           Back to login
         </a>
