@@ -25,7 +25,7 @@ export default function Page() {
         <Menu isOpen={isOpen}>
           <ChatHistory chatState={chatState} dispatch={dispatch} />
         </Menu>
-        {messages.length?<div className="hidden md:block">
+        {messages.length?<div className="hidden md:block lg:pl-14">
         <Logo />
         </div>:null}
       <Chat
