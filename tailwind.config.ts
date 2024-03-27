@@ -41,6 +41,9 @@ const config: Config = {
         "yellow-green":"#63B201",
         "bluish-cyan":"#3A9AD9",
         "greenish-cyan":"#3EB489",
+        "blue-charcoal":"#080F17",
+        "mirage":"#111832",
+        "ebony":"#0C0B1D",
       },
 
       
