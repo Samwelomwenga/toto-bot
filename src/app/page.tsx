@@ -8,6 +8,7 @@ import Menu from "@/components/Menu";
 import useChatHandlers from "./hooks/useChatHandlers";
 import ChatHistory from "@/components/ChatHistory";
 import Logo from "@/components/Logo";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export const runtime = "edge";
 
@@ -21,6 +22,7 @@ export default function Page() {
     <>
       <ToastContainer />
       <main className=" min-h-svh w-full bg-gray-300 bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
+        <ThemeSwitcher />
         <Header isOpen={isOpen} toggle={toggle} />
         <Menu isOpen={isOpen}>
           <ChatHistory chatState={chatState} dispatch={dispatch} />

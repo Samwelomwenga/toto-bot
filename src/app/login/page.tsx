@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import useLogin from "../hooks/useLogin";
 import InputField from "@/components/InputField";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export default function Login() {
   const {
@@ -21,6 +22,7 @@ export default function Login() {
     <>
       <ToastContainer />
       <main className=" bg-gray-300 h-svh w-full  text-black grid place-items-center">
+        <ThemeSwitcher />
         <h1 className="text-4xl font-semibold text-center">Login</h1>
         <p className="text-center text-xl">
           <span className="block font-bold">Welcome back!</span> Login to your
