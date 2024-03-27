@@ -43,7 +43,7 @@ const config: Config = {
         "greenish-cyan":"#3EB489",
         "blue-charcoal":"#080F17",
         "mirage":"#111832",
-        "ebony":"#0C0B1D",
+        "ebony":"#2B2C35",
       },
 
       
