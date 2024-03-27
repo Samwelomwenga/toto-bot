@@ -25,7 +25,7 @@ function Menu({ isOpen, children }: MenuProps) {
   return (
     
       <aside
-        className={` bg-gray-600 bg-contain w-[17rem] fixed top-0  left-0 md:static h-48 rounded md:w-64  md:rounded-none shadow-md animate-fade-in-right  m-h-svh md:h-full ${
+        className={` bg-gray-600 dark:bg-blue-charcoal text-white  bg-contain w-[17rem] fixed top-0  left-0 md:static h-48 rounded md:w-64  md:rounded-none shadow-md animate-fade-in-right  m-h-svh md:h-full ${
           isOpen ? "block" : "hidden"
         } md:block w-5/6 min-h-screen z-20`}
       >

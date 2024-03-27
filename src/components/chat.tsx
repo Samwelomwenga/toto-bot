@@ -51,7 +51,7 @@ export default function MyComponent({
         ) : (
           <div className="absolute top-1/2 md:left-[40%] w-full md:w-[40ch] grid mx-auto px-1">
             <Logo/>
-            <p className=" text-black text-center">
+            <p className=" text-black dark:text-white text-center">
               Hello, for any assistance in nurturing babies, 
               feel free to ask below. 
             </p>
@@ -67,7 +67,7 @@ export default function MyComponent({
       >
         <input
           className={
-            " w-4/5 rounded border shadow-sm text-gray-700 pl-3 md:py-4 md:px-3 border-leaf focus:outline-none focus:ring-2 focus:ring-bright-orange focus:border-none"
+            " w-4/5 rounded border shadow-sm text-gray-700 dark:text-white pl-3 md:py-4 md:px-3  focus:outline-none focus:ring-2 focus:ring-bright-orange dark:focus:ring-yellow-green focus:border-none"
           }
           value={input}
           onChange={handleInputChange}
@@ -76,7 +76,7 @@ export default function MyComponent({
 
         <button
           type="submit"
-          className=" bg-bright-orange hover:bg-transparent hover:ring-2 hover:ring-bright-orange hover:text-bright-orange text-white font-bold py-3 px-5 md:px-8 rounded focus:outline-none focus:shadow-outline"
+          className=" bg-bright-orange dark:bg-yellow-green hover:bg-transparent dark:hover:bg-transparent hover:ring-2 hover:ring-bright-orange dark:hover:ring-yellow-green hover:text-bright-orange dark:hover:text-yellow-green text-white font-bold py-3 px-5 md:px-8 rounded focus:outline-none focus:shadow-outline"
         >
           <IoSend className=" md:w-6 md:h-6" />
         </button>

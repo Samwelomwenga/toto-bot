@@ -14,7 +14,7 @@ function ChatHistory({ chatState, dispatch }: ChatHistoryProps) {
   const { history,loading } = useHistory();
   return (
     <div className=" fixed top-20 left-4 bottom-20 w-64 md:w-60 p-3">
-      <h2 className="text-center text-yellow-green text-lg font-bold">Chat History</h2>
+      <h2 className="text-center text-yellow-green dark:text-bright-orange text-lg font-bold">Chat History</h2>
       <div className="overflow-y-auto">
         {history.length ? (
           history.map((chat) => (

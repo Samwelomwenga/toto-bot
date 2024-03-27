@@ -13,7 +13,7 @@ function ThemeSwitcher() {
         setTheme(theme === "dark" ? "light" : "dark");
         }
   return (
-    <div className='absolute right-10 top-10' onClick={handleThemeChange}>{theme==="dark"?<MdLightMode size={28} />:<MdDarkMode size={28} />}</div>
+    <div className='absolute right-20 md:right-10 md:top-10 hover:cursor-pointer' onClick={handleThemeChange}>{theme==="dark"?<MdLightMode className='text-white' size={28} />:<MdDarkMode size={28} />}</div>
   )
 }
 

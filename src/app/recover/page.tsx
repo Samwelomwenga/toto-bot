@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useRecoverPassword from "../hooks/useRecoverPassword";
 import InputField from "@/components/InputField";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export default function Recover() {
   const { register, handleSubmit, errors, isLoading, handleRecoverPassword } =
@@ -12,7 +13,8 @@ export default function Recover() {
   return (
     <>
       <ToastContainer />
-      <main className="bg-gray-300 h-svh w-full  text-black grid place-items-center">
+      <main className="bg-gray-300 dark:bg-blue-charcoal h-svh w-full  text-black dark:text-white grid place-items-center">
+        <ThemeSwitcher />
         <h1 className="text-4xl font-semibold text-center">Recover Password</h1>
         <p className="text-center text-xl">
           Please enter email to recover your password
@@ -21,21 +23,25 @@ export default function Recover() {
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit(handleRecoverPassword)}
-          className=" bg-greenish-cyan   px-6 pt-20  pb-10 rounded mx-6 md:mx-auto md:w-96 "
+          className=" bg-greenish-cyan dark:bg-mirage   px-6 pt-20  pb-10 rounded mx-6 md:mx-auto md:w-96 "
         >
           <label className=" text-lg font-semibold" htmlFor="email">
             {" "}
             Email
           </label>
-         <InputField register={register} type="email" name="email" placeholder="johndoe@gmail.com"/>
+          <InputField
+            register={register}
+            type="email"
+            name="email"
+            placeholder="johndoe@gmail.com"
+          />
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
-         
 
           <button
             disabled={isLoading}
-            className="bg-bright-orange py-3 px-16 mx-12 mt-14 mb-8 text-lg text-white hover:text-bright-orange font-medium rounded-md border-none text-center  hover:bg-transparent hover:ring-2 hover:ring-bright-orange transition-2000"
+            className="bg-bright-orange dark:bg-yellow-green py-3 px-16 mx-12 mt-14 mb-8 text-lg text-white hover:text-bright-orange dark:hover:text-yellow-green font-medium rounded-md border-none text-center  hover:bg-transparent dark:hover:bg-transparent hover:ring-2 hover:ring-bright-orange dark:hover:ring-yellow-green  transition-2000"
           >
             {" "}
             {isLoading ? <ImSpinner9 /> : <p>Recover</p>}{" "}
@@ -44,7 +50,7 @@ export default function Recover() {
 
         <a
           href="/login"
-          className="text-center block hover:cursor-pointer hover:text-bright-orange mb-48"
+          className="text-center block hover:cursor-pointer hover:text-bright-orange dark:hover:text-yellow-green mb-48"
         >
           Back to login
         </a>

@@ -21,7 +21,7 @@ export default function Page() {
   return (
     <>
       <ToastContainer />
-      <main className=" min-h-svh w-full bg-gray-300 bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
+      <main className=" min-h-svh w-full bg-gray-300 dark:bg-ebony bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
         <ThemeSwitcher />
         <Header isOpen={isOpen} toggle={toggle} />
         <Menu isOpen={isOpen}>

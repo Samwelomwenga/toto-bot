@@ -38,7 +38,7 @@ function LogOut() {
     router.refresh();
   };
   return (
-    <div className=" py-3 text-center hover:text-bright-orange font-bold rounded mb-3 px-3 bg-bright-orange hover:cursor-pointer hover:ring-2 hover:ring-bright-orange hover:bg-transparent" onClick={handleSignOut}>
+    <div className=" py-3 text-center hover:text-bright-orange dark:hover:text-yellow-green font-bold rounded mb-3 px-3 bg-bright-orange dark:bg-yellow-green hover:cursor-pointer hover:ring-2 hover:ring-bright-orange dark:hover:ring-yellow-green hover:bg-transparent dark:hover:bg-transparent" onClick={handleSignOut}>
       LogOut
     </div>
   );
