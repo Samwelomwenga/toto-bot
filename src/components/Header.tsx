@@ -6,11 +6,11 @@ import ThemeSwitcher from "./ThemeSwitcher";
 
 function Header({ isOpen, toggle }: { isOpen: boolean; toggle: () => void }) {
   return (
-    <header className="text-black bg-gray-600 dark:bg-blue-charcoal  w-full px-3 py-4 shadow-lg sticky md:hidden">
+    <header className="text-black bg-transparent  dark:bg-transparent  w-full px-3 py-4 shadow-lg sticky md:hidden">
       <div className="flex justify-between align-middle">
         <Logo isLogo={true}/>
-       <div className=" f">
-        <ThemeSwitcher />
+       <div>
+        <ThemeSwitcher isHome={true} />
         {!isOpen ? (
           <SlMenu
             className={` w-7 h-7 text-bright-orange dark:text-yellow-green transition-transform duration-700 ease-in-out ${
