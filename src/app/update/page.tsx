@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import useUpdatePassword from "../hooks/useUpdatePassword";
 import { Input } from "postcss";
 import InputField from "@/components/InputField";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 export default function Update() {
   const { register, handleSubmit, errors,isLoading,handleUpdatePassword  } =useUpdatePassword();
@@ -14,7 +15,8 @@ export default function Update() {
     <>
       <ToastContainer />
       <main className="bg-gray-300 dark:bg-blue-charcoal h-svh w-full  text-black dark:text-white grid place-items-center">
-        <h1 className="text-4xl font-semibold text-center">Update Password</h1>
+        <ThemeSwitcher/>
+        <h1 className="text-4xl font-semibold text-center pt-16">Update Password</h1>
         <p className="text-center text-xl">
           Please enter a new password to update your account
         </p>
@@ -46,7 +48,7 @@ export default function Update() {
 
         <a
           href="/login"
-          className="text-center block hover:cursor-pointer hover:text-bright-orange dark:hover:text-yellow-green mb-52"
+          className="text-center block hover:cursor-pointer hover:text-bright-orange dark:hover:text-yellow-green mb-32"
         >
           Back to login
         </a>
