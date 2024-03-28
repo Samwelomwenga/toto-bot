@@ -15,7 +15,7 @@ export default function Recover() {
       <ToastContainer />
       <main className="bg-gray-300 dark:bg-blue-charcoal h-svh w-full  text-black dark:text-white grid place-items-center">
         <ThemeSwitcher />
-        <h1 className="text-4xl font-semibold text-center">Recover Password</h1>
+        <h1 className="text-4xl font-semibold text-center pt-16">Recover Password</h1>
         <p className="text-center text-xl">
           Please enter email to recover your password
         </p>
@@ -50,7 +50,7 @@ export default function Recover() {
 
         <a
           href="/login"
-          className="text-center block hover:cursor-pointer hover:text-bright-orange dark:hover:text-yellow-green mb-48"
+          className="text-center block hover:cursor-pointer hover:text-bright-orange dark:hover:text-yellow-green mb-32"
         >
           Back to login
         </a>
