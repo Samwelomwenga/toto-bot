@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useClickAway } from "@uidotdev/usehooks";
 import Header from "@/components/Header";
 import Chat from "../components/chat";
 import Menu from "@/components/Menu";
@@ -14,23 +15,32 @@ export const runtime = "edge";
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
+  console.log("isOpen", isOpen)
   const toggle = () => setIsOpen(!isOpen);
+  const ref = useClickAway(() => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  }) as React.MutableRefObject<HTMLElement>;
+
   const { chatState, handleChatSubmit, handleInputChange, input, dispatch } =
     useChatHandlers();
-    const {messages}=chatState;
+  const { messages } = chatState;
   return (
     <>
       <ToastContainer />
       <main className=" min-h-svh w-full bg-gray-300 dark:bg-ebony bg-cover bottom-0 md:grid grid-cols-6 md:grid-rows-1 h-full">
         <ThemeSwitcher isHomeLarge={true} />
-        <Header isOpen={isOpen} toggle={toggle} />
-        <Menu isOpen={isOpen}>
+        <Header isOpen={isOpen} toggle={toggle}  />
+        <Menu isOpen={isOpen} ref={ref}>
           <ChatHistory chatState={chatState} dispatch={dispatch} />
         </Menu>
-        {messages.length?<div className="hidden md:block lg:pl-14">
-        <Logo />
-        </div>:null}
-      <Chat
+        {messages.length ? (
+          <div className="hidden md:block lg:pl-14">
+            <Logo />
+          </div>
+        ) : null}
+        <Chat
           chatState={chatState}
           handleChatSubmit={handleChatSubmit}
           handleInputChange={handleInputChange}
