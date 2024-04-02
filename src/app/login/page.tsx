@@ -83,7 +83,7 @@ export default function Login() {
         </form>
         <button
           onClick={handleLogInWithGoogle}
-          className="flex place-items-center gap-4 ring-bright-orange dark:ring-yellow-green ring-2  py-3 px-4 mx-auto mb-32 lg:mb-10  text-lg font-medium rounded-md hover:text-bright-orange dark:hover:text-yellow-green  text-center hover:bg-transparent  hover:ring-0  transition-2000"
+          className="flex place-items-center gap-4 ring-bright-orange dark:ring-yellow-green ring-2  py-3 px-4 mx-auto mb-5 lg:mb-10  text-lg font-medium rounded-md hover:text-bright-orange dark:hover:text-yellow-green  text-center hover:bg-transparent  hover:ring-0  transition-2000"
         >
           {" "}
           <FcGoogle size={24} />

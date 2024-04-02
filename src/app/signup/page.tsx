@@ -90,7 +90,7 @@ export default function Signup() {
         </form>
         <button
           onClick={handleSignUpWithGoogle}
-          className="flex place-items-center gap-4 ring-bright-orange dark:ring-yellow-green dark:hover:text-yellow-green ring-2  py-3 px-4 mx-auto mb-32 lg:mb-10  text-lg font-medium rounded-md  text-center  hover:text-bright-orange hover:ring-0  transition-2000"
+          className="flex place-items-center gap-4 ring-bright-orange dark:ring-yellow-green dark:hover:text-yellow-green ring-2  py-3 px-4 mx-auto mb-5 lg:mb-10  text-lg font-medium rounded-md  text-center  hover:text-bright-orange hover:ring-0  transition-2000"
         >
           <FcGoogle size={24} />
            <p>Sign Up with Google</p>{" "}
