@@ -15,8 +15,7 @@ export const runtime = "edge";
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("isOpen", isOpen)
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => setIsOpen(true);
   const ref = useClickAway(() => {
     if (isOpen) {
       setIsOpen(false);

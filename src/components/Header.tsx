@@ -11,7 +11,7 @@ function Header({ isOpen,toggle}: { isOpen: boolean; toggle: () => void}) {
         <Logo isLogo={true}/>
        <div>
         <ThemeSwitcher isHome={true} />
-        {!isOpen ? (
+        {!isOpen &&(
           <SlMenu
             className={` w-7 h-7 text-bright-orange dark:text-yellow-green transition-transform duration-700 ease-in-out ${
               isOpen ? "opacity-0 scale-0" : "opacity-100 scale-100"
@@ -19,14 +19,7 @@ function Header({ isOpen,toggle}: { isOpen: boolean; toggle: () => void}) {
             onClick={toggle}
           />
         ) 
-        : (
-          <VscChromeClose
-            className={` w-7 h-7 text-bright-orange dark:text-yellow-green  transition-transform duration-700 ease-in-out ${
-              isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"
-            }`}
-            onClick={toggle}
-          />
-        )
+        
         }
         </div>
       </div>
