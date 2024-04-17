@@ -6,6 +6,7 @@ import { IoSend } from "react-icons/io5";
 import loadingGif from "../../public/loading.gif";
 import { ChatInitialState } from "@/app/hooks/useChatHandlers";
 import Logo from "./Logo";
+import ChatPlaceholder from "ChatPlaceholder";
 
 type MyComponentProps = {
   chatState: ChatInitialState;
@@ -27,33 +28,37 @@ export default function MyComponent({
     <div className="mx-auto w-full px-1 py-2 md:col-start-3 md:col-span-3 mb-20 h-full">
       <ul className="space-y-3 w-full md:space-y-6 md:py-8 mb-4">
         {messages.length ? (
-          chatState.messages.map((message) => (
-            chatState.loadingMessages?
-            <Image key={message.id} src={loadingGif} alt="loading" />
-            :<li
-              key={message.id}
-              className={`p-2 md:p-6 text-white rounded ${
-                message.role === "user" ? "bg-greenish-cyan" : "bg-salmon"
-              } ${
-                message.role === "user" ? "mr-auto" : "ml-auto"
-              } shadow text-gray-700 ${message.role === "user" ? "w-3/4" : "w-5/6"} `}
-            >
-              <span className="font-semibold">
-                {message.role === "user" ? "User: " : "BOT: "}
-              </span>
-              {chatState.loadingMessages ? (
-                <Image src={loadingGif} alt="loading" />
-              ) : (
-                message.content
-              )}
-            </li>
-          ))
+          chatState.messages.map((message) =>
+            chatState.loadingMessages ? (
+              <ChatPlaceholder key={message.id} />
+            ) : (
+              <li
+                key={message.id}
+                className={`p-2 md:p-6 text-white rounded ${
+                  message.role === "user" ? "bg-greenish-cyan" : "bg-salmon"
+                } ${
+                  message.role === "user" ? "mr-auto" : "ml-auto"
+                } shadow text-gray-700 ${
+                  message.role === "user" ? "w-3/4" : "w-5/6"
+                } `}
+              >
+                <span className="font-semibold">
+                  {message.role === "user" ? "User: " : "BOT: "}
+                </span>
+                {chatState.loadingMessages ? (
+                  <Image src={loadingGif} alt="loading" />
+                ) : (
+                  message.content
+                )}
+              </li>
+            )
+          )
         ) : (
           <div className="absolute top-1/2 md:left-[40%] w-full md:w-[40ch] grid mx-auto px-1">
-            <Logo/>
+            <Logo />
             <p className=" text-black dark:text-white text-center">
-              Hello, for any assistance in nurturing babies, 
-              feel free to ask below. 
+              Hello, for any assistance in nurturing babies, feel free to ask
+              below.
             </p>
           </div>
         )}
